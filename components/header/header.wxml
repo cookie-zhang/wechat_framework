@@ -1,0 +1,18 @@
+<wxs module="filter" src="../../filter/filter.wxs"></wxs>
+<view wx:if="{{bgImg}}" class="ui-header bgClass {{noBorder ? 'no-border' : ''}}"
+			style="padding-top: {{statusBarHeight}}px;background-image: {{bgImg}}">
+	<view>
+		<image class="ui-header__back" catchtap="onBtnTap" hidden="{{hideLeftBtn}}"
+					 src="{{filter.getLocalPhoto(leftIcon)}}"></image>
+		<view class="ui-header__title" style="line-height: 44px;color: {{titleColor}}">{{title}}</view>
+	</view>
+</view>
+<view wx:if="{{!bgImg}}" class="ui-header bgClass {{noBorder ? 'no-border' : ''}}"
+			style="padding-top: {{statusBarHeight}}px;background: {{bgColor}}">
+	<view>
+	    <image class="ui-header__back" catchtap="onBtnTap" hidden="{{hideLeftBtn}}"
+	    	src="{{filter.getLocalPhoto(leftIcon)}}"></image>
+	    <view class="ui-header__title" style="line-height: 44px;color: {{titleColor}}">{{title}}</view>
+	</view>
+</view>
+<view class="ui-header__bg" style="height: {{statusBarHeight + 44}}px"></view>

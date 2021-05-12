@@ -1,0 +1,33 @@
+<wxs module="filter" src="../../filter/filter.wxs"></wxs>
+<!--pages/me/index.wxml-->
+<header title="我的"></header>
+<view class="ui-main">
+    <view class="ui-wrap" style="background-image:url(\"{{filter.getLocalPhoto('/me/me_info_bg.png')}}\");">
+        <view class="ui-myInfo">
+            <view class="ui-avatar">
+                <button class="ui-avatar__btn" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+                    <image class="ui-avatar__img" src="{{userInfo.avatar ? userInfo.avatar : filter.getLocalPhoto('/me/aiqin_logo.png')}}" mode="aspectFit"></image>
+                </button>
+                <view class="ui-role" wx:if="{{userInfo.verifier}}">{{userInfo.verifier.level == 1 ? '店长' : '店员'}}</view>
+                <view class="ui-role" wx:if="{{!userInfo.verifier && userInfo.distribution}}">{{userInfo.distribution.title}}</view>
+            </view>
+            <view class="ui-profile">
+                <block wx:if="{{userInfo.nickname}}">
+                    <view class="ui-name" >{{userInfo.nickname}}</view>
+                    <view class="ui-profile__id">ID: {{userInfo.memberId}}</view>
+                </block>
+                <block wx:if="{{!userInfo.nickname}}">
+                    <view class="ui-sign" bindtap="onLoginTap">登录/注册</view>
+                </block>
+            </view>
+        
+        </view>
+    </view>
+    <tabBar selected="1"></tabBar>
+    <!-- modal end   -->
+</view>
+<login
+    id="login"
+    hiddenLoginPopup="{{hiddenLoginPopup}}"
+    bind:onCancelTap="onCancelTap">
+</login>

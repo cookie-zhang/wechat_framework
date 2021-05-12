@@ -1,0 +1,18 @@
+<!-- pages/me/bindWechat.wxml -->
+<wxs module="filter" src="../../filter/filter.wxs"></wxs>
+<header title="绑定微信"></header>
+<view class="ui-main">
+    <view class="ui-weChatBox" wx:if="{{isShow}}">
+        <view class="ui-numbleBox">
+            <view class="ui-box__numble">微信号</view>
+            <input class="ui-box__text" type="text" placeholder="请输入微信号" placeholder-class="ui-placeholder" bindinput="change" />
+            <!-- <view class="ui-box__text">请输入微信号</view> -->
+        </view>
+        <view class="ui-btn__text {{isChange?'is-active':''}}" catch:tap="onBindTap">立即绑定</view>
+    </view>
+    <view class="ui-successBox" wx:if="{{!isShow}}">
+        <image class="ui-wx__icon" src="{{filter.getLocalPhoto('/me/wx-icon.png')}}" />
+        <view class="ui-wx__name">你的微信号: {{ wechat }}</view>
+        <image class="ui-suc__pic" src="{{filter.getLocalPhoto('/me/suc-pic.png')}}" />
+    </view>
+</view>

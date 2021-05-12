@@ -1,0 +1,12 @@
+<view class="ui-footer"  style="padding-bottom: {{safeAreaBottom + 'px'}}"></view>
+<view class="ui-listBox"  style="padding-bottom: {{safeAreaBottom + 'px'}}" hidden="{{isHide}}">
+    <view class="ui-listItem" wx:for="{{list}}" wx:key="index" bindtap="onChooseTap" data-index="{{index}}">
+        <image class="ui-listItem__icon" src="{{selected == index ? item.selectUrl : item.url}}"></image>
+        <!--<view class="ui-listItem__title" style="color: {{selected == index ? '#000' : '#999'}}">-->
+        <!-- <view class="ui-listItem__title" style="color: {{selected == index ? '#FF1B4D' : '#5F5F5F'}}"> -->
+        <view class="ui-listItem__title" style="color: {{selected == index ? '#FF1B4D' : '#333333'}}">
+            {{item.title}}
+        </view>
+        <view class="ui-listItem__dot" wx:if="{{item.title == '购物车' && cartNum}}"></view>
+    </view>
+</view>

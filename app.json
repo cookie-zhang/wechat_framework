@@ -1,0 +1,57 @@
+{
+    "pages": [
+        "pages/home/index",
+        "pages/home/map",
+        "pages/me/index",
+        "pages/me/bindPhone",
+        "pages/me/bindWechat"
+    ],
+    "subpackages": [
+    {
+        "root": "pagesStore/",
+        "name": "store",
+        "pages": [
+        ]
+    }],
+    "tabBar": {
+        "borderStyle": "white",
+        "backgroundColor": "#FFFFFF",
+        "list": [
+        {
+            "pagePath": "pages/home/index",
+            "text": ""
+        },
+        {
+            "pagePath": "pages/me/index",
+            "text": ""
+        }]
+    },
+    "window":
+    {
+        "enablePullDownRefresh": true,
+        "onReachBottomDistance": 10,
+        "backgroundColor": "#ffffff",
+        "navigationBarBackgroundColor": "#ffffff",
+        "navigationBarTitleText": "",
+        "navigationBarTextStyle": "black",
+        "navigationStyle": "custom"
+    },
+    "permission":
+    {
+        "scope.userLocation":
+        {
+            "desc": "获取定位"
+        }
+    },
+    "sitemapLocation": "sitemap.json",
+    "usingComponents":
+    {
+        "header": "/components/header/header",
+        "tabBar": "/components/tabBar/tabBar",
+        "authorize": "/components/authorize/authorize",
+        "login": "/components/login/login"
+    },
+    "plugins":
+    {
+    }
+}

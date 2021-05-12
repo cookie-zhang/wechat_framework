@@ -1,0 +1,13 @@
+<wxs module="filter" src="../../filter/filter.wxs"></wxs>
+<cover-view class="ui-authorize" hidden="{{hiddenLoginPopup}}">
+	<cover-view class="ui-authorize__bg"></cover-view>
+	<cover-view class="ui-dialog__bd">
+       <cover-image class="ui-bdImg" src="{{filter.getLocalPhoto('/me/new_loginPopup-bg.png')}}"></cover-image>
+        <cover-view class="ui-dialog__content">您还未登录</cover-view>
+        <cover-view class="ui-dialog__text">您需要登陆完成才能进行下一步操作</cover-view>
+		<cover-view class="ui-btns">
+			<button class="ui-btn" catchtap="onCancelTap">稍后授权</button>
+			<button class="ui-btn ui-sureBtn" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">确定</button>
+		</cover-view>
+	</cover-view>
+</cover-view>

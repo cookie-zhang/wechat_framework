@@ -1,0 +1,26 @@
+<!-- pages/me/bindPhone.wxml -->
+<wxs module="filter" src="../../filter/filter.wxs"></wxs>
+<header title="绑定手机号"></header>
+<view class="ui-main">
+    <view class="ui-phoneBox" wx:if="{{isPhone}}">
+        <view class="ui-title">请绑定手机号</view>
+        <view class="ui-numble__box">
+            <view class="ui-numble__left">手机号</view>
+            <input class="ui-numble__right" type="number" placeholder="请输入手机号码" placeholder-class="ui-placeholder" bindinput="change"/>
+        </view>
+        <view class="ui-code__box">
+            <view class="ui-code__left">验证码</view>
+            <input class="ui-code__mid" type="text" placeholder="请输入验证码" placeholder-class="ui-placeholder" bindinput="onCodeChange" />
+            <view class="ui-code__right" catch:tap="onCodeTap">{{ text }}</view>
+        </view>
+        <view class="ui-btn__text {{isChange?'is-active':''}}" catch:tap="onBindTap">{{ userInfo.phone ? '绑定新手机号':'立即绑定' }}</view>
+    </view>
+    <view class="ui-noPhoneList" wx:if="{{!isPhone}}">
+        <image class="ui-icon" src="{{filter.getLocalPhoto('/me/phone.png')}}" />
+        <view class="ui-textBox">
+            <view class="ui-box__title">你当前绑定的手机号：</view>
+            <view class="ui-box__numble">{{ phone }}</view>
+        </view>
+        <view class="ui-btn__change" catch:tap="onPhoneChangeTap">更改手机号</view>
+    </view>
+</view>

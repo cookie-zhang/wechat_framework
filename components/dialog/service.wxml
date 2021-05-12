@@ -1,0 +1,14 @@
+<wxs src="../../filter/filter.wxs" module="filter"></wxs>
+<view class="ui-cancelError__box" wx:if="{{showServiceDialog}}">
+    <view class="ui-cancel__bg"></view>
+    <view class="ui-cancel__bd">
+        <view class="ui-cancel__title">订单异常,请联系客服为您处理</view>
+        <view class="ui-cancel__subTitle">微信授权登录后才能咨询客服哦~</view>
+        <view class="ui-cancelService">
+            <view class="ui-cancelService__title">客服工作时间</view>
+            <view class="ui-cancelService__time">周一至周日09:00-18:00</view>
+        </view>
+        <button open-type="contact" class="ui-cancel__btn">咨询在线客服</button>
+        <view class="ui-cancel__hide" catchtap="onHideTap">取消</view>
+    </view>
+</view>

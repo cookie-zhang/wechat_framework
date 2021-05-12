@@ -1,0 +1,81 @@
+/* pages/me/bindWechat.wxss */
+page{
+    background: #FFFFFF;
+}
+.ui-weChatBox{
+    padding: 168rpx 60rpx 0 60rpx;
+}
+.ui-numbleBox{
+    padding-bottom: 40rpx;
+    border-bottom: 2rpx solid #eeeeee;
+}
+.ui-box__numble{
+    display: inline-block;
+    font-size:28rpx;
+    color:#BBBBBB;
+    line-height:28rpx;
+    margin-right: 24rpx;
+}
+.ui-box__text{
+    display: inline-block;
+    width: 200rpx;
+    font-size:28rpx;
+    color:#CCCCCC;
+    line-height:28rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+}
+.ui-placeholder{
+    font-size:28rpx;
+    color:#CCCCCC;
+    line-height:28rpx;
+}
+.ui-btnBox{
+    margin-top: 180rpx;
+    margin-left: 60rpx;
+}
+.ui-btn__img{
+    width: 512rpx;
+    height: 88rpx;
+}
+.ui-btn__text{
+    margin: 180rpx auto;
+    width:512rpx;
+    height:88rpx;
+    font-size:28rpx;
+    text-align: center;
+    color:#999999;
+    line-height:88rpx;
+    background:#E1E1E1;
+    border-radius:8rpx;
+}
+.is-active{
+    color: #FFFFFF;
+    background:linear-gradient(175deg,#FFCF39 0%,#FF9F22 100%);
+}
+/*绑定微信成功*/
+.ui-successBox{
+    padding-top: 120rpx;
+}
+.ui-wx__icon{
+    display: block;
+    width: 120rpx;
+    height: 120rpx;
+    margin: 0 auto;
+}
+.ui-wx__name{
+    font-size: 36rpx;
+    font-weight: bold;
+    color: #333333;
+    line-height: 36rpx;
+    text-align: center;
+    margin: 40rpx 0 94rpx 0;
+}
+.ui-suc__pic{
+    display: block;
+    width: 350rpx;
+    height: 260rpx;
+    margin: 0 auto;
+}

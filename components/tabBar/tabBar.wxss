@@ -1,0 +1,64 @@
+/* components/tabBar.wxss */
+
+.ui-footer {
+    box-sizing: content-box;
+    height: 100rpx;
+}
+
+.ui-listBox {
+    display: flex;
+    /*width: 644rpx; !*750-54-52*!*/
+    width: 688rpx; /*750-31-31*/
+    /*width: 750rpx;*/
+    height: 106rpx;
+    /*padding-left: 54rpx;
+    padding-right: 52rpx;*/
+    padding-left: 31rpx;
+    padding-right: 31rpx;
+    background: #FFFFFF;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: content-box;
+}
+
+.ui-listItem {
+    position:relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ui-listItem__icon {
+    display: block;
+    width: 47rpx;
+    height: 47rpx;
+}
+
+.ui-listItem__title {
+    /*height: 36rpx;*/
+    /* margin-top: 12rpx; */
+    margin-top: 10rpx;
+    /* font-size: 20rpx; */
+    font-size: 24rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 500;
+    color: #000;
+    line-height: 24rpx;
+}
+
+.isSelect {
+    color: #F8B62D;
+}
+.ui-listItem__dot {
+    position: absolute;
+    top: -5rpx;
+    right: -5rpx;
+    width: 12rpx;
+    height: 12rpx;
+    background-color: red;
+    border-radius: 50%;
+}

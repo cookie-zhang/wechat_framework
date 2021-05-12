@@ -1,0 +1,28 @@
+<wxs src="../../filter/filter.wxs" module="filter"></wxs>
+<view  hidden="{{hiddenComment}}">
+    <cover-view class="ui-header bgClass {{noBorder ? 'no-border' : ''}}"
+         style="padding-top: {{statusBarHeight}}px;background: {{bgColor}}">
+        <cover-view>
+            <cover-image class="ui-header__back" bindtap="onBtnTap" hidden="{{hideLeftBtn}}" src="{{filter.getLocalPhoto(leftIcon)}}"></cover-image>
+            <cover-view class="ui-header__title" style="line-height: 44px;color: {{titleColor}}">更多评价</cover-view>
+        </cover-view>
+    </cover-view>
+    <scroll-view class="ui-main" scroll-y="{{true}}" lower-threshold="onReachBottom">
+        <view class="ui-commentBox" wx:if="{{list.length}}">
+            <view class="ui-commentItem" wx:for="{{list}}" wx:key="index">
+                <view class="ui-commentItem__info">
+                    <view class="ui-infoIrem__imgBox">
+                        <image src="{{filter.getPhoto(host, item.commentUser.avatar)}}" class="ui-imgItem__perIcon"></image>
+                    </view>
+                    <view class="ui-infoItem_name">{{item.commentUser.nickname}}</view>
+                    <view class="ui-infoItem_time">{{item.time}}</view>
+                </view>
+                <view class="ui-commentItem__content">{{item.content}}</view>
+                <view class="ui-commentItem__images" wx:if="{{item.imgUrls}}">
+                    <image src="{{filter.getPhoto(host, imgItem)}}" class="ui-imagesItem__img" 
+                        wx:for="{{item.photos}}" wx:for-item="imgItem" wx:for-index="imgIndex" wx:key="imgIndex" catchtap="onImgTap" data-subindex="{{imgIndex}}" data-index="{{index}}" mode="aspectFill"></image>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+</view>

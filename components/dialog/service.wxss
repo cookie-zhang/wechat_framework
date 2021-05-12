@@ -1,0 +1,101 @@
+.ui-cancelError__box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+
+.ui-cancel__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.2);
+}
+
+.ui-cancel__bd {
+    position: relative;
+    width: 600rpx;
+    padding: 45rpx 35rpx 16rpx;
+    border-radius: 20rpx;
+    background-color: #fff;
+}
+
+.ui-cancel__title {
+    font-size: 32rpx;
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+}
+
+.ui-cancel__subTitle {
+    margin-top: 30rpx;
+    font-size: 32rpx;
+    color: #666;
+    text-align: center;
+    font-weight: 500;
+}
+
+.ui-cancelService {
+    margin-top: 50rpx;
+}
+
+.ui-cancelService__title:before,
+.ui-cancelService__title:after {
+    content: '';
+    display: block;
+    width: 165rpx;
+    height: 2rpx;
+    background-color: #c8c8c8;
+}
+
+.ui-cancelService__title:before {
+    margin-right: 18rpx;
+}
+
+.ui-cancelService__title:after {
+    margin-left: 18rpx;
+}
+
+.ui-cancelService__title {
+    display: flex;
+    align-items: center;
+    height: 66rpx;
+    line-height: 66rpx;
+    font-size: 28rpx;
+    color: #666;
+    text-align: center;
+}
+
+.ui-cancelService__time {
+    font-size: 24rpx;
+    color: #666;
+    text-align: center;
+}
+
+.ui-cancel__btn {
+    width: 330rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    margin-top: 60rpx;
+    font-size: 28rpx;
+    color: #fff;
+    text-align: center;
+    background: linear-gradient(89deg, #FF315C 0%, #FF6889 100%);
+    border-radius: 30rpx;
+}
+
+.ui-cancel__hide {
+    width: 150rpx;
+    height: 46rpx;
+    margin: 20rpx auto 0;
+    font-size: 28rpx;
+    color: #FF325B;
+    text-align: center;
+}

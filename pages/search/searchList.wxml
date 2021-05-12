@@ -1,0 +1,131 @@
+<!--pages/search/searchResult.wxml-->
+<wxs module="filter" src="../../filter/filter.wxs"></wxs>
+<!-- <header title="搜索"></header> -->
+<view class="ui-header" style="padding-top: {{headerToTop+'px'}}">
+    <view class="ui-header__back" catchtap="onBackTap" style="background-image: url({{filter.getLocalPhoto('/header/icon-back-black.png')}});"></view>
+    <view class="ui-header__search" catchtap="onBackTap" style="width: {{inputWidth+'px'}}">{{keywords}}</view>
+    <!-- /*<input class="ui-header__search" style="width: {{inputWidth+'px'}}" value="{{keywords}}" />*/ -->
+</view>
+<view class="ui-headerBox" style="padding-top: {{headerToTop+'px'}}"></view>
+<view class="ui-main">
+    <!-- 搜索 -->
+    <view class="ui-filterBox">
+        <!-- <view class="ui-input">
+            <view class="ui-input__left" style="background-image: url({{filter.getLocalPhoto('/search/icon-search.png')}});" catch:tap="onSearchTap">
+                <view class="ui-input__input">{{ keywords }}</view>
+            </view>
+            <view class="ui-input__icon" catch:tap="onStyleTap" style="background-image: url({{filter.getLocalPhoto( iconSrc)}});"></view>
+        </view> -->
+        <!-- 一级搜索 -->
+        <view class="ui-filter">
+             <view class="ui-filter__item {{currentFrist == 0 ? 'is-action' : ''}}" data-belong="1" data-index="{{0}}" catch:tap="onTabChangeTap">
+                综合
+                <view class="ui-filter__icon">
+                    <image src="{{currentFrist == 0 ? filter.getLocalPhoto('/search/index_downCurrent.png') : filter.getLocalPhoto('/search/icon-arrow.png')}}" mode="scaleToFill"/>
+                </view>
+            </view>
+            <view class="ui-filter__item {{currentFrist == 1 ? 'is-action' : ''}}" data-belong="1" data-index="{{1}}" catch:tap="onTabChangeTap">
+                销量
+            </view>
+            <view class="ui-filter__item is-price {{currentFrist == 2 ? 'is-action' : ''}}" data-belong="1" data-index="{{2}}" catch:tap="onTabChangeTap">
+                价格
+                <view class="ui-filter__icon">
+                     <image mode="aspectFill" src="{{currentFrist == 2 ? filter.getLocalPhoto('/search/icon-innormal.png') : filter.getLocalPhoto('/search/icon-normal.png')}}" class="{{ sort == 1 ? '' : 'is-down'}}" />
+                </view>
+            </view>
+            <view class="ui-filter__item is-layout" catchtap="onStyleTap">
+                <image class="ui-layout__icon is-horizontal" src="{{filter.getLocalPhoto('/search/index_horizontal.png')}}" mode="scaleToFill" wx:if="{{!showStyle}}"/>
+                <image class="ui-layout__icon is-vertical" src="{{filter.getLocalPhoto('/search/index_vertical.png')}}" mode="scaleToFill" wx:if="{{showStyle}}"/>
+            </view>
+            <view class="ui-filter__item is-filtrate">
+                <view class="ui-filter__item {{currentFrist == 3 ? 'is-action' : ''}}" data-belong="1" data-index="{{3}}" catch:tap="onTabChangeTap">
+                    筛选
+                    <view class="ui-filter__icon">
+                        <image src="{{ currentFrist == 3 ? filter.getLocalPhoto('/search/icon-filter-on.png') : filter.getLocalPhoto('/search/icon-filter-normal.png')}}" mode="scaleToFill"/>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!-- 二级搜索 -->
+        <view class="ui-filter-second" wx:if="{{ currentFrist == 3 }}">
+            <block wx:for="{{secondData}}" wx:key="index">
+                <view class="ui-filter__list {{item.isSelect ? 'is-secondAction' : ''}}" data-index="{{index}}" catch:tap="onTabChangeTap">
+                    {{ selectTitle[index] ? selectTitle[index] : item.title }}
+                    <view class="ui-filter__icon" wx:if="{{item.children != undefined }}">
+                        <image src="{{ item.isSelect  ? filter.getLocalPhoto('/search/index_downCurrent.png') : filter.getLocalPhoto('/search/icon-arrow.png')}}" mode="aspectFill"/>
+                    </view>
+                </view>
+            </block>
+            <!-- <view class="ui-filter__list">
+                爱亲自营
+            </view>
+            <view class="ui-filter__list ">
+                品牌
+                <view class="ui-filter__icon">
+                    <image src="{{ currentSecond == 3 ? filter.getLocalPhoto('/search/index_downCurrent.png') : filter.getLocalPhoto('/search/icon-arrow.png')}}" mode="aspectFill"/>
+                </view>
+            </view>
+            <view class="ui-filter__list is-secondAction">
+                分类
+                <view class="ui-filter__icon">
+                    <image src="{{ currentSecond == 4 ? filter.getLocalPhoto('/search/index_downCurrent.png') : filter.getLocalPhoto('/search/icon-arrow.png')}}" mode="aspectFill"/>
+                </view>
+            </view> -->
+        </view>
+        <!-- 三级搜索 -->
+        <view class="ui-filter-third" wx:if="{{thirdData.length != 0 && maskOpen}}">
+            <view class="ui-filter__content">
+                <block wx:for="{{thirdData}}" wx:key="index">
+                    <view class="ui-filter__contentItem" data-index="{{index}}" catch:tap="onSelectTap">
+                        <image wx:if="{{item.isSelect}}" class="ui-filter__iconSelect" mode="aspectFill" src="{{filter.getLocalPhoto('/search/icon-select.png')}}"/>
+                        {{item.title}}
+                    </view>
+                </block>
+            </view>
+            <view class="ui-filter__btnBox">
+                <view class="ui-filter__btn is-reset" catch:tap="onResetTap">重置</view>
+                <view class="ui-filter__btn is-ok" catch:tap="onOktap">确定</view>
+            </view>
+        </view>
+    </view>
+    <view class="ui-mask" wx:if="{{maskOpen}}" catch:tap="onCloseTap"></view>
+    <view class="ui-line"></view>
+    <!-- 商品列表 -->
+    <view>
+        <view class="ui-goods" style="margin-top: {{ currentFrist == 3 ? 90 : 90 }}rpx;" wx:if="{{goodsList.length != 0}}">
+            <block wx:for="{{goodsList}}" wx:key="index">
+                <view class="ui-goods__item {{showStyle ? 'is-column' : 'is-block'}}" data-index="{{index}}" data-type="{{item.type}}" data-id="{{item.id}}" catch:tap="onGoodsTap">
+                    <view class="ui-goods__img">
+                        <view class="ui-goods__imgTag">{{item.platformFlag == 1 ? '快递到家' : '门店自提'}}</view>
+                        <image mode="aspectFill" src="{{ filter.getPhoto(host, item.imgUrl) }}"/>
+                    </view>
+                    <view class="ui-goods__info">
+                        <!--<view class="ui-goods__subtitle">【日本直邮 品牌自采】</view> -->
+                        <view class="ui-goods__title">{{ item.mainTitle }}</view>
+                        <view class="ui-goods__label">{{ item.secondTitle }}</view>
+                        <view class="ui-goods__price">
+                            <view class="ui-goods__nowPrice"><text>¥</text>{{ item.nowPrice }}</view>
+                            <view class="ui-goods__passPrice">原价￥{{ item.originPrice }}</view>
+                        </view>
+                        <view class="ui-goods__eva">
+                            <view wx:for="{{ item.goodsLabelList }}" wx:key="index" wx:for-item="label" class="ui-goods__spe">{{label.title}}</view>
+                            <!-- <view class="ui-goods__spe">特价</view> -->
+                           <!-- <view class="ui-goods__com" wx:if="{{showStyle}}">30000评论</view>
+                            <view class="ui-goods__com">98.7%好评</view> -->
+                            <!-- <view class="ui-goods__spe">{{item.platformFlag == 1 ? '商城' : '门店'}}</view> -->
+                        </view>
+                        <!-- <view class="ui-goods__line"></view> -->
+                    </view>
+                </view>
+            </block>
+        </view>
+        <view class="ui-goods__end" wx:if="{{!hasNextPage}}">已经到底啦~</view>
+    </view>
+    <view class="ui-blank" wx:if="{{goodsList.length == 0}}">
+        <image class="ui-blank__img" mode="aspectFill" src="{{filter.getLocalPhoto('/search/new_icon-blank.png')}}"/>
+        <view class="ui-blank__textBox">
+            <view class="ui-blank__text">无搜索结果</view>
+            <view class="ui-blank__text">换个关键词搜索试一下</view>
+        </view>
+    </view>
+</view>

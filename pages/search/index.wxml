@@ -1,0 +1,108 @@
+<!--pages/search/index.wxml-->
+<wxs module="filter" src="../../filter/filter.wxs"></wxs>
+<header title="搜索"></header>
+<view class="ui-main">
+    <form bindsubmit="onSearch">
+        <view class="ui-input">
+            <view class="ui-input__left" style="background-image: url({{filter.getLocalPhoto('/search/icon-search.png')}});">
+                <input type="text" name="search" class="ui-input__input" bindconfirm="onSearch" confirm-type="search" focus="{{true}}" placeholder="搜索你想要的商品"/>
+            </view>
+            <button class="ui-input__text" form-type="submit" >搜索</button>
+        </view>
+    </form>
+    <view class="ui-history">
+        <view class="ui-history__title">历史搜索</view>
+        <block wx:if="{{history.length != 0}}">
+            <block  wx:for="{{history}}" wx:key="index">
+                <view class="ui-history__item" data-keywords="{{ item }}" catch:tap="onSearchTap">
+                    {{item}}
+                    <view wx:if="{{del}}" class="ui-icon__close" catch:tap="onDelTap" data-index="{{index}}">
+                        <image src="{{filter.getLocalPhoto('/search/icon-close.png')}}" mode="aspectFill"/>
+                    </view>
+                </view>
+            </block>
+        </block>
+        <view wx:else class="ui-history__noRecode">暂无搜索记录~</view>
+        <view class="ui-history__recycle" catch:tap="onDelStatusTap">
+            <image src="{{filter.getLocalPhoto('/search/icon-recycle.png')}}" mode="aspectFill"/>
+        </view>
+    </view>
+    <view class="ui-history">
+        <view class="ui-history__title">热门搜索</view>
+        <view class="ui-history__recode">
+            <view class="ui-history__item {{index >= 5 ? '' : 'is-yellow'}}" wx:for="{{hot}}" wx:key="index"  data-keywords="{{ item.title }}" catchtap="onSearchTap">{{item.title}}</view>
+        </view>
+    </view>
+    <!-- <form bindsubmit="onSearch">
+        <view class="ui-search">
+            <input type="text" name="search" class="ui-search__input" bindconfirm="onSearch" confirm-type="search" focus="{{true}}" placeholder="搜索你想要的商品"/>
+        </view>
+        <view class="ui-select">
+            <view class="ui-selectTab {{tabIndex == 1?'is-select':''}}" catchtap="onSelectTap" data-tabindex="1">
+                综合<image src="{{filter.getLocalPhoto(downIcon?'/search/index_downCurrent.png':'/search/index_down.png')}}" mode="scaleToFill"/>
+            </view>
+            <view class="ui-selectTab {{tabIndex == 2?'is-select':''}}" catchtap="onSelectTap" data-tabindex="2">
+                销量
+            </view>
+            <view class="ui-selectTab {{tabIndex == 3?'is-select':''}}" catchtap="onSelectTap" data-tabindex="3">
+                价格<image src="{{filter.getLocalPhoto(!downIcon?'/search/index_downCurrent.png':'/search/index_down.png')}}" mode="scaleToFill"/>
+            </view>
+            <view class="ui-select__way" catchtap="onWayTap">
+                <image class="ui-select__wayIcon" src="{{filter.getLocalPhoto('/search/index_horizontal.png')}}" mode="scaleToFill"wx:if="{{isWay}}"/>
+                <image class="ui-select__wayIcon" src="{{filter.getLocalPhoto('/search/index_vertical.png')}}" mode="scaleToFill" wx:if="{{!isWay}}"/>
+            </view>
+            <view class="ui-selectTab is-filtrate {{tabIndex == 4?'is-select':''}}" catchtap="onSelectTap" data-tabindex="4">
+                筛选<image src="{{filter.getLocalPhoto('/search/index_filter.png')}}" mode="scaleToFill"/>
+            </view>
+        </view>
+    </form>
+    <view class="ui-goods">
+
+        <view class="ui-goods__horizontal" wx:if="{{isWay}}">
+            <view class="ui-goods__item">
+                <image src="{{filter.getPhoto(ossHost,item.imgUrl)}}" mode="aspectFill" class="ui-goods__img"></image>
+                <view class="ui-goods__right">
+                    <view class="ui-goods__title">爱他美幼儿配方奶粉(12-36月龄3段)</view>
+                    <view class="ui-goods__text">爱亲自营 品质保证</view>
+                    <view class="ui-goods__price">
+                        <view><text class="ui-goods__priceSign">￥</text>288.0</view>
+                        <view class="ui-goods__originPrice">原价￥99.6</view>
+                    </view>
+                    <view class="ui-goods__link">
+                        <view class="ui-goods__linkEffect">宝宝洗护</view>
+                        <view class="ui-goods__linkHouse">门店</view>
+                        <view class="ui-goods__linkHot">热卖</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class="ui-goods__vertical" wx:if="{{!isWay}}">
+            <view class="ui-goods__verItem">
+                <image src="{{filter.getPhoto(ossHost,item.imgUrl)}}" mode="aspectFill" class="ui-goods__verImg"></image>
+                <view class="ui-goods__verTitle">爱他美幼儿配方奶粉(12-36月龄3段)</view>
+                <view class="ui-goods__verText">爱亲自营 品质保证</view>
+                <view class="ui-goods__verPrice">
+                    <view><text class="ui-goods__verPriceSign">￥</text>288.0</view>
+                    <view class="ui-goods__verOriginPrice">原价￥99.6</view>
+                </view>
+                <view class="ui-goods__verLink">
+                    <view class="ui-goods__verLinkEffect">宝宝洗护</view>
+                    <view class="ui-goods__verLinkHouse">门店</view>
+                    <view class="ui-goods__verLinkHot">热卖</view>
+                </view>
+            </view>
+        </view>
+
+    </view>
+    <view class="ui-bottom">已经到底啦~</view> -->
+    <!-- <view class="ui-history">
+        <view class="ui-history__title">常用分类</view>
+        <view class="ui-history__recode">
+            <view class="ui-classify" wx:for="{{9}}" wx:key="index">
+                <image class="ui-classify__img"/>
+                <view class="ui-classify__title">品牌牛奶</view>
+            </view>
+        </view>
+    </view> -->
+</view>

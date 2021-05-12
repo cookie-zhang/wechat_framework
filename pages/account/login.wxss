@@ -1,0 +1,85 @@
+/* pages/account/login.wxss */
+page {
+    height: 100%;
+    background: #ffffff;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-image: url(https://aiqinv3.oss-cn-zhangjiakou.aliyuncs.com/image/account/bg.png);
+}
+.ui-main{
+}
+.ui-logo {
+    font-size: 0;
+    text-align: center;
+    padding-top: 75rpx;
+    padding-bottom: 162rpx;
+}
+.ui-logo__icon {
+    display: inline-block;
+    width: 127rpx;
+    height: 127rpx;
+    margin-right: 13rpx;
+}
+.ui-logo__right {
+    display: inline-block;
+    vertical-align: top;
+}
+.ui-logo__rightTitle {
+    margin-top: 23rpx;
+    margin-bottom: 16rpx;
+    font-size:57rpx;
+    color:#1093D5;
+    line-height: 57rpx;
+    /*font-weight:400;*/
+    /*font-family:FZCuYuan-M03S;*/
+}
+.logo__rightText {
+    line-height: 26rpx;
+    color:#1093D5;
+    font-size:26rpx;
+    /*font-weight:400;*/
+    /*font-family:FZZhunYuan-M02S;*/
+}
+.ui-admit__yes {
+    width:574rpx;
+    height:90rpx;
+    margin: 0 auto 19rpx;
+    line-height: 90rpx;
+    font-size:38rpx;
+    color: #FFFFFF;
+    text-align: center;
+    /*font-weight:500;*/
+    border:1px solid rgba(150, 150, 150, 0.11);
+    background: #61B0E9;
+    border-radius:45rpx;
+    box-shadow:0px 2px 16px 0px rgba(1,117,200,0.1);
+}
+.ui-admit__no {
+    width:574rpx;
+    height:90rpx;
+    margin: auto;
+    line-height: 90rpx;
+    font-size:38rpx;
+    color: #333333;
+    text-align: center;
+    font-weight:500;
+    border:1px solid rgba(150, 150, 150, 0.11);
+    background:#FFFFFF;
+    border-radius:45rpx;
+    box-shadow:0px 2px 16px 0px rgba(0, 0, 0, 0.1);
+}
+.ui-agree {
+    padding-top: 20rpx;
+    font-size: 28rpx;
+    font-weight:500;
+    text-align: center;
+}
+.ui-agree__read {
+    color: #1093D5;
+}
+.ui-logo__bg {
+    width: 100%;
+    display: inherit;
+    margin-top: -57rpx;
+}

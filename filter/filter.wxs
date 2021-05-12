@@ -1,0 +1,536 @@
+var imageHost = '';
+var filter = {
+    getDate: function (value, type) {
+        if ((value + '').length < 13) value *= 1000;
+        var d = getDate(value);
+        // d.setTime(value);
+        var year = d.getFullYear();
+        var month = d.getMonth() + 1;
+        var day = d.getDate();
+        var timeStr = d.toTimeString();
+        var time = timeStr.substring(0, timeStr.indexOf('GMT'));
+        time = time.substring(0, time.length - 4);
+        var date = d.getDay();
+        if (month < 10) month = "0" + month;
+        if (day < 10) day = "0" + day;
+        var array = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+        var strDate = year + '-' + month + '-' + day + ' ' + time;
+        if (type == 1) {
+            return year + '.' + month + '.' + day;
+        }else if(type == 2) {
+            return year + '年' + month + '月' + day + '日';
+        }
+        return strDate;
+    },
+    getDateWithSymbol: function (value, symbol) {
+        if ((value + '').length < 13) value *= 1000;
+        var d = getDate(value);
+        var year = d.getFullYear();
+        var month = d.getMonth() + 1;
+        var day = d.getDate();
+        if (month < 10) month = "0" + month;
+        if (day < 10) day = "0" + day;
+        
+        if (symbol) {
+            return year + symbol + month + symbol + day;
+        } else {
+            return year + '年' + month + '月' + day + '日';
+        }
+        
+    },
+    countDown: function(endTime, startTime, type) {
+        // return startTime;
+        function format(time) {
+            return time < 10 ? ('0' + time): time
+        }
+        var t = endTime - startTime;
+        var seconds = Math.floor( (t) % 60 );
+        var minutes = Math.floor( (t/60) % 60 );
+        var hours = Math.floor( (t/(60*60)) );//总的小时
+        var hour =  Math.floor( (t/(60*60) % 24) );// 24小时之内
+        var days = Math.floor( (t/(60*60*24)) );
+
+        if (!type) {
+            return t >= 0 ? (format(hours) + ':' + format(minutes) + ':' + format(seconds)): '00:00:00';
+        }else if(type == 'd') {
+            return t >= 0 ? format(days): 0;
+        }else if (type == 'h') {
+            return t >= 0 ? format(hour): 0;
+        }else if (type == 'hs') {
+            return t >= 0 ? format(hours): 0;
+        } else if (type == 'm') {
+            return t >= 0 ? format(minutes): 0;
+        } else if (type == 's') {
+            return t >= 0 ? format(seconds): 0;
+        }
+    },
+    getDateTime: function (value) {
+        if ((value + '').length < 13) value *= 1000;
+        var d = getDate(value);
+        // d.setTime(value);
+        var year = d.getFullYear();
+        var month = d.getMonth() + 1;
+        var day = d.getDate();
+        var timeStr = d.toTimeString();
+        var time = timeStr.substring(0, timeStr.indexOf('GMT'));
+        time = time.substring(0, time.length - 4);
+        var date = d.getDay();
+        if (month < 10) month = "0" + month;
+        if (day < 10) day = "0" + day;
+        // var strDate = year + '-' + month + '-' + day + ' ' + time;
+        return year + '月' + month + '月' + day + '日' + '  ' + time;
+    },
+    getTime: function (value) {
+        if ((value + '').length < 13) value *= 1000;
+        var d = getDate(value);
+        var timeStr = d.toTimeString();
+        var time = timeStr.substring(0, timeStr.indexOf('GMT'));
+        time = time.substring(0, time.length - 4);
+        return time;
+    },
+    getPhoto: function (host, photo) {
+        // 默认图片路径使用oss的
+        host = ''
+        if (photo) {
+            photo = photo.replace('//upload', '/upload');
+            if (photo.indexOf('http') > -1) {
+                return photo;
+            } else {
+                return photo ? (host + photo) : '';
+            }
+        } else {
+            return '';
+        }
+    },
+    getAvatar: function (host, avatar) {
+        if (avatar) {
+            avatar = avatar.replace('//upload', '/upload');
+            if (avatar.indexOf('http') > -1) {
+                return avatar;
+            } else {
+                return avatar ? (host + avatar) : '';
+            }
+        } else {
+            return '';
+        }
+    },
+    getLocalPhoto: function (path, type) {
+        if (type) {
+            var host = '../../images';
+        } else {
+            var host = imageHost;
+        }
+        return host + path;
+    },
+    round: function (value) {
+        return Math.round(value)
+    },
+    getOrderPhoto: function (status) {
+        var host = imageHost;
+        switch (status) {
+            case 'SYSTEM_CANCEL':
+                return host + '/order/cancel_icon.png';
+            case 'CUSTOMER_CANCEL':
+                return host + '/order/cancel_icon.png';
+            case 'WAIT_BUYER_PAY':
+                return host + '/order/waiPay_icon.png';
+            case 'WAIT_GROUP':
+                return host + '/order/waitDelivery_icon.png';
+            case 'WAIT_SELLER_SEND_GOODS':
+                return host + '/order/waitDelivery_icon.png';
+            case 'WAIT_BUYER_CONFIRM_GOODS':
+                return host + '/order/wainReceive_icon.png';
+            case 'EXPIRED':
+                return host + '/order/cancel_icon.png';
+            case 'WAIT_COMMENT':
+                return host + '/order/success.png';
+            case 'TRADE_BUYER_SIGNED':
+                return host + '/order/success.png';
+            case 'TRADE_FINISH':
+                return host + '/order/success.png';
+            default:
+                return '';
+        }
+    },
+    getAfterPhoto: function (status) {
+        var host = imageHost;
+        switch (status) {
+            case 1:
+                return host + '/order/waitCheck_icon.png';
+            case 2:
+                return host + '/order/checked_icon.png';
+            case 3:
+                return host + '/order/rejectCheck_icon.png';
+            case 4:
+                return host + '/order/finishSale.png';
+            case 5:
+                return host + '/order/refundFinish.png';
+            default:
+                break;
+        }
+    },
+    getAfterStatus: function (status) {
+        switch (status) {
+            case 1:
+                return '售后审核中'
+            case 2:
+                return '审核通过'
+            case 3:
+                return '审核不通过'
+            case 4:
+                return '售后结束'
+            case 5:
+                return '退款成功'
+            default:
+                break;
+        }
+    },
+    getOrderStatus: function (status, storeShopOrder) {
+        switch (status) {
+            case 'TRADE_CLOSE':
+                return '订单已取消';
+            case 'EX_WAREHOUSE':
+                return '出库中';
+            case 'PICKING':
+                return '挑货中';
+            case 'SYSTEM_CANCEL':
+                return '已取消';
+            case 'CUSTOMER_CANCEL':
+                return '已取消';
+            case 'WAIT_BUYER_PAY':
+                return '待付款';
+            case 'WAIT_GROUP':
+                return '待成团';
+            case 'WAIT_SELLER_SEND_GOODS':
+                return '待发货';
+            case 'WAIT_CHECK':
+                if (storeShopOrder) {
+                    return '以下商品已送到门店可自提';
+                } else {
+                    return '待核销';
+                }
+            case 'WAIT_DELIVERY':
+                return '配送中';
+            case 'WAIT_BUYER_CONFIRM_GOODS':
+                return '待收货';
+            case 'EXPIRED':
+                return '已过期';
+            case 'TRADE_BUYER_SIGNED':
+                return '已签收';
+            case 'TRADE_FINISH':
+                return '已完成';
+            case 'CHECKED':
+                return '已核销';
+            case 'AFTERSALE_FINISH':
+                return '退款完成';
+            case 'WAIT_COMMENT':
+                return  '已签收';
+            case 'PICKING':
+                return '未发货';
+            case 'EX_WAREHOUSE':
+                return '未发货';
+            case 'DELIVERED':
+                return '已发货';
+            case 'SIGNED':
+                return '已签收';
+            default:
+                return '';
+        }
+    },
+    getCard: function (type) {
+        switch (type) {
+            case 1:
+                return '专属会员'
+            case 2:
+                return '钻石会员'
+            case 3:
+                return '金卡会员'
+            case 4:
+                return '门店合伙人'
+            default:
+                break;
+        }
+    },
+    getCheckStatus: function (status) {
+        switch (status) {
+            case 1:
+                return '审核中'
+            case 2:
+                return '待用户发货'
+            case 3:
+                return '用户已发货'
+            case 4:
+                return '审核不通过，请联系客服'
+            case 5:
+                return '用户撤回'
+            case 6:
+                return '已退款'
+            default:
+                break;
+        }
+    },
+    getListStatus: function (status) {
+        switch (status) {
+            case 1:
+                return '审核中'
+            case 2:
+                return '待用户发货'
+            case 3:
+                return '用户已发货'
+            case 4:
+                return '审核不通过'
+            case 5:
+                return '用户撤回'
+            case 6:
+                return '已退款'
+            default:
+                break;
+        }
+    },
+    getCheckPhoto: function (status) {
+        var host = imageHost;
+        switch (status) {
+            case 1:
+                return host + '/order/waitCheck_icon.png';
+            case 2:
+                return host + '/order/checked_icon.png';
+            case 3:
+                return host + '/order/checked_icon.png';
+            case 4:
+                return host + '/order/rejectCheck_icon.png';
+            case 5:
+                return host + '/order/rejectCheck_icon.png';
+            case 6:
+                return host + '/order/refundFinish.png';
+            default:
+                break;
+        }
+    },
+    getSTOCheckStatus: function (status) {
+        switch (status) {
+            case 1:
+                return '待审核'
+            case 2:
+                return '审核通过'
+            case 3:
+                return '审核通过'
+            case 4:
+                return '审核不通过'
+            case 5:
+                return '待审核'
+            case 6:
+                return '审核通过'
+            default:
+                break;
+        }
+    },
+    getSTOCheckPhoto: function (status) {
+        var host = imageHost;
+        switch (status) {
+            case 1:
+                return host + '/order/waitCheck_icon.png';
+            case 2:
+                return host + '/order/checked_icon.png';
+            case 3:
+                return host + '/order/checked_icon.png';
+            case 4:
+                return host + '/order/rejectCheck_icon.png';
+            case 5:
+                return host + '/order/rejectCheck_icon.png';
+            case 6:
+                return host + '/order/checked_icon.png';
+            default:
+                break;
+        }
+    },
+    getLogiCompany: function (value) {
+        switch(value) {
+			case "SF":
+				return '顺丰快递';
+			case "STO":
+				return '申通快递';
+			case "HHTT":
+                return '天天快递';
+            case "YTO":
+                return '圆通快递';
+            case "EMS":
+                return 'EMS快递';
+            case "ZTO":
+                return '中通快递';
+            case "YD":
+                return '韵达快递';
+            case "HTKY":
+                return '百世快递';
+            case "YZPY":
+                return '邮政快递包裹';
+            case "UC":
+                return '优速快递';
+            case "DBL":
+                return '德邦快递';
+            case "JD":
+                return '京东快递';
+			default:
+			   return '';
+		}
+    },
+    setCutdownTime: function(now, end, type) {
+        end = end || 0;
+        now = now || 0;
+        var h = 0;
+        var m = 0;
+        var s = 0;
+        if (now && end) {
+            var delta = end - now;
+            h = Math.floor(delta / (60 * 60));
+            m = Math.floor((delta / (60)) % 60);
+            s = Math.floor((delta % 60));
+        }
+        if (h < 10) h = '0' + h;
+        if (m < 10) m = '0' + m;
+        if (s < 10) s = '0' + s;
+        if (type == 'h') {
+            return h || '00';
+        } else if (type == 'm') {
+            return m || '00';
+        } else if (type == 's') {
+            return s || '00';
+        } else {
+            return (h + ' : ' + m + ' : ' + s);
+        }
+    },
+    getCountDown: function(delta, type) {
+        var h = 0;
+        var m = 0;
+        var s = 0;
+        if (delta) {
+            h = Math.floor(delta / (60 * 60));
+            m = Math.floor((delta / (60)) % 60);
+            s = Math.floor((delta % 60));
+        }
+        if (h < 10) h = '0' + h;
+        if (m < 10) m = '0' + m;
+        if (s < 10) s = '0' + s;
+        if (type == 'h') {
+            return h || '00';
+        } else if (type == 'm') {
+            return m || '00';
+        } else if (type == 's') {
+            return s || '00';
+        } else {
+            return (h + ' : ' + m + ' : ' + s);
+        }
+    },
+    getCommission: function(incomeType, expenditureType, type){
+        if (type == 1) {
+            switch(incomeType) {
+                case 1: return '佣金收入';
+                case 3: return '提现拒绝返还';
+                case 4: return '推荐奖';
+            }
+        } else if (type == 2) {
+            return '提现申请';
+        }
+        // var value = '';
+        // var reward = '';
+        // switch (level) {
+        //     case 1:
+        //         value = '一级';
+        //         break;
+        //     case 2:
+        //         value = '二级';
+        //         break;
+        //     case 3:
+        //         value = '店主';
+        //         break;
+        //     case 4:
+        //         value = '自购';
+        //         break;
+        //     default:
+        //         break;
+        // }
+        // switch (type) {
+        //     case 1:
+        //         reward = '佣金';
+        //         break;
+        //     case 2:
+        //         reward = '爱豆';
+        //         break;
+        //     case 3:
+        //         reward = '奖金';
+        //         break;
+        //     default:
+        //         break;
+        // }
+        // if(level == 3){
+        //     return '店长分红';
+        // }else{
+        //     return value + reward;
+        // }
+    },
+    getSellType: function(value){
+        switch(value) {
+			case "common":
+				return '普通';
+			case "book":
+				return '预售';
+			case "reduction":
+                return '满减';
+            case "gift":
+                return '买赠';
+			default:
+			   return '';
+		}
+    },
+    transCouponStatus: function (status) {
+        switch(status) {
+            case 1:
+                return '未使用';
+            case 2:
+                return '已使用';
+            case 3:
+                return '已过期';
+            default:
+               return '';
+        }
+    },
+    billStatus: function (status, objectType) {
+        if (objectType == 1){
+            switch(status) {
+                case 1:
+                    return '待发放';
+                case 2:
+                    return '已发放';
+                case 3:
+                    return '已退款';
+                default:
+                   return '';
+            }
+        }
+        if (objectType == 2){
+            switch(status) {
+                case 1:
+                    return '待审核';
+                case 2:
+                    return '已打款';
+                case 3:
+                    return '已返还';
+                default:
+                   return '';
+            }
+        }
+        if (objectType == 2){
+            switch(status) {
+                case 1:
+                    return '';
+                case 2:
+                    return '已发放';
+                case 3:
+                    return '';
+                default:
+                    return '';
+            }
+        }
+    }
+
+};
+module.exports = filter;

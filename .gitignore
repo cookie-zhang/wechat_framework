@@ -1,0 +1,21 @@
+
+# Default ignored files
+/workspace.xml
+.DS_Store
+project.config.json
+
+logs/
+npm-debug.log
+yarn-error.log
+node_modules/
+yarn.lock
+coverage/
+.idea/
+run/
+*.sw*
+*.un~
+typings/
+.nyc_output/
+
+/miniprogram_npm/*
+.vscode/*

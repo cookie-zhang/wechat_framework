@@ -1,0 +1,21 @@
+<!--pages/account/login.wxml-->
+<wxs module="filter" src="../../filter/filter.wxs"></wxs>
+<header id="header" title="" bgColor="#ffffff"></header>
+<view class="ui-main">
+    <view class="ui-logo">
+        <image class="ui-logo__icon" src="{{filter.getLocalPhoto('/live/logo.png')}}" mode="aspectFill"></image>
+        <view class="ui-logo__right">
+            <view class="ui-logo__rightTitle">demo</view>
+            <view class="logo__rightText">demo</view>
+        </view>
+    </view>
+    <view class="ui-admit">
+        <button class="ui-admit__yes" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">授权微信登录</button>
+        <view class="ui-admit__no" catchtap="onCloseTap">暂不授权</view>
+    </view>
+    <view class="ui-agree">
+        <text class="ui-agree__text">阅读并同意</text>
+        <text class="ui-agree__read" catchtap="onProtocolTap">《demo服务协议》</text>
+    </view>
+    <!-- <image class="ui-logo__bg" src="{{filter.getLocalPhoto('')}}" mode="aspectFill"></image> -->
+</view>

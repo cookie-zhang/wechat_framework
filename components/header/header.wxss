@@ -1,0 +1,78 @@
+@charset "UTF-8";
+
+/*cover-view {
+    padding: 0;
+    margin: 0;
+    border: none;
+    box-sizing: border-box;
+}*/
+
+.ui-header {
+    box-sizing: content-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 750rpx;
+    height: 44px;
+    /* background-color: #fff; */
+    /*border-bottom: 1px solid var(__lineColor);*/
+    z-index: 999;
+    background-size:100% 100%;
+    background-repeat:no-repeat;
+}
+.ui-header:after{
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    /*background-color: red;*/
+    background-color: var(__lineColor);
+}
+
+.ui-header.no-border {
+    border-bottom: none;
+}
+
+.ui-header__back {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    padding: 12px 12px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-origin: content-box;
+    background-clip: content-box;
+}
+
+.ui-header__back.is-search {
+    /*background-image: url(http://www.gzlingren.com:8098/libeika/images/home/icon-search.png);*/
+}
+
+.ui-header__title {
+    max-width: 350rpx;
+    margin: 0 auto;
+    font-size: 18px;
+    color: var(__fontColor);
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-weight: 500;
+    font-family: PingFangSC-Medium,PingFang SC;
+}
+
+
+.ui-header__back.is-photo {
+    padding: 6px;
+}
+
+.ui-header__bg {
+    width: 100%;
+    background-color: rgba(0,0,0,0);
+}
