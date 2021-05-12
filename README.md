@@ -131,4 +131,4 @@ eg: // 有引用template时定义
     }
 ```
 ##### 示例 
-![avatar](/images/ex.jpg)
+![avatar](http://blog.cookiezhang.com:8001/imgs/ex.jpg)
