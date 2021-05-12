@@ -130,3 +130,5 @@ eg: // 有引用template时定义
         }
     }
 ```
+##### 示例 
+![avatar](/images/ex.jpg)
