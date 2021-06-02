@@ -207,6 +207,19 @@ _wx.prototype = {
                 // res.scrollTop  // 节点的竖直滚动位置
             }).exec()
         });
+    },
+    // 获取用户信息
+    async getUserProfile(){
+        return Promise((resolve, reject)=>{
+            wx.getUserProfile({
+                success: (res) => {
+                    resolve(res)
+                },
+                fail(err) {
+                    reject(err);
+                }
+              })
+        })
     }
 };
 
