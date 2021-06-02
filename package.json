@@ -1,7 +1,7 @@
 {
   "name": "yueya",
   "version": "1.0.0",
-  "description": "``` wxapp-v1框架是自己在开发了几个小程序之后整理归纳出来的,已经过实际项目的验证,一个基于微信小程序api的种子项目,用于快速构建微信小程序项目,使我们摆脱那些重复劳动,专注于业务代码的编写,减少加班. 基础的js库有: underscore.js 第三方 q.js 第三方promise库 base.js 自定义 包含微信小程序api接口(不全,用到哪个封装哪个)以及一些常用的方法 config.js app常用配置 包含请求接口路径,页面跳转路径,localStorage的key值等 ```",
+  "description": "原生小程序",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
